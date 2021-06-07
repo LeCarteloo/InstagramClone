@@ -11,8 +11,9 @@
         </div>
 
         <div class="col-9 pt-5">
-            <div>
+            <div class="d-flex justify-content-between align-items-baseline">
                 <h1>{{ $user->nickname }}</h1>
+                <a href="#">Add new post</a>
             </div>
             <div class="d-flex">
                 <div><strong>153 </strong>post</div>
@@ -21,7 +22,7 @@
             </div>
             <div class="pt-5"><strong>{{ $user->profile->title }}</strong></div>
             <div> {{ $user->profile->description }} </div>
-            <div><a href="#"> {{ $user->profile->url}} </a></div>
+            <div><a href="/post"> {{ $user->profile->url}} </a></div>
         </div>
 
         <div class="row pt-5">

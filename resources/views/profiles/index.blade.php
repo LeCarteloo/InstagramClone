@@ -7,16 +7,23 @@
     <div class="row">
 
         <div class="col-3 p-5">
-            <img src="/svg/logo.svg" alt="" class="rounded-circle" style="height:120px; width:120px;">
+            <img src="/storage/{{$user->profile->image}}" alt="" class="rounded-circle w-100">
         </div>
 
         <div class="col-9 pt-5">
             <div class="d-flex justify-content-between align-items-baseline">
                 <h1>{{ $user->nickname }}</h1>
-                <a href="#">Add new post</a>
+                @can('update', $user->profile)
+                    <a href="/p/create">Add new post</a>
+                @endcan
             </div>
+
+            @can('update', $user->profile)
+            <a href="/profile/{{ $user->id }}/edit">Edit Profile</a>
+            @endcan
+
             <div class="d-flex">
-                <div><strong>153 </strong>post</div>
+                <div><strong> {{ $user->posts->count() }} </strong>post</div>
                 <div class="pl-5"><strong>23k </strong>followers</div>
                 <div class="pl-5"><strong>212 </strong>following</div>
             </div>
@@ -26,18 +33,15 @@
         </div>
 
         <div class="row pt-5">
-
+            @foreach($user->posts as $post)
             <div class="col-4">
-            <img src="https://i.pinimg.com/564x/80/39/29/803929eef1902751e1bad274889d474c.jpg" class="w-100" alt="">
-            </div>
+                <a href="/p/{{ $post->id }}">
+                    <img src="/storage/{{ $post->image }}" class="w-100 pb-5" alt="">
+                </a>
 
-            <div class="col-4">
-            <img src="https://i.pinimg.com/564x/80/39/29/803929eef1902751e1bad274889d474c.jpg" class="w-100" alt="">
             </div>
+            @endforeach
 
-            <div class="col-4">
-            <img src="https://i.pinimg.com/564x/80/39/29/803929eef1902751e1bad274889d474c.jpg" class="w-100" alt="">
-            </div>
         </div>
 
     </div>

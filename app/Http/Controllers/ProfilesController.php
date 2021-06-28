@@ -10,7 +10,8 @@ class ProfilesController extends Controller
 {
     public function index(User $user) { // we dont need to use \App\Models\User cause we imported that 
         // $user = User::findOrFail($user); // This could be used without \App\Models\User
-        return view('profiles/index', compact('user'));
+        $follows = (auth()->user()) ? auth()->user()->following->contains($user->id) : false;
+        return view('profiles/index', compact('user', 'follows'));
     }
 
     public function edit(User $user) {
@@ -34,11 +35,13 @@ class ProfilesController extends Controller
             
             $image = Image::make(public_path("storage/{$imagePath}"))->fit(1000,1000);
             $image->save();
+
+            $imageArray = ['image' => $imagePath];
         }
 
         auth()->user()->profile->update(array_merge(
             $data,
-            ['image' => $imagePath]
+            $imageArray ?? []
         ));
         
         return redirect("/profile/{$user->id}");

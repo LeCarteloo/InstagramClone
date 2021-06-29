@@ -24,12 +24,10 @@ class LoginController extends Controller
     /**
      * Where to redirect users after login.
      *
-     * @var string
-     */
+      * @var string
+      */
 
-    // This is disabled cause i want to redirect page to just ip without 
-    // any specific file
-    // protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
